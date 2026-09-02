@@ -8,11 +8,11 @@ export const Frame1: React.FC = () => {
   const [isTransitioning, setIsTransitioning] = useState(false)
   const [showCard, setShowCard] = useState(false)
 
-  // Reveal the royal title & start card after ~3 seconds delay
+  // Give the opening scene time to establish before revealing the title card.
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowCard(true)
-    }, 2800)
+    }, 4800)
 
     return () => clearTimeout(timer)
   }, [])
@@ -36,7 +36,7 @@ export const Frame1: React.FC = () => {
       {/* Atmospheric Warm Vignette Overlay */}
       <div className="frame-overlay-vignette"></div>
 
-      {/* Central Start Game Card (Appears after 3 seconds) */}
+      {/* Central Start Game Card (Appears after the opening delay) */}
       <div className={`frame1-center-container ${showCard ? 'card-visible' : 'card-hidden'}`}>
         {showCard && (
           <div className="royal-card frame1-card">

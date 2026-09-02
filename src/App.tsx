@@ -4,8 +4,6 @@ import { Frame1 } from './components/Frame1'
 import { Frame2 } from './components/Frame2'
 import { Frame3 } from './components/Frame3'
 import { Frame4 } from './components/Frame4'
-import { Frame5 } from './components/Frame5'
-import { Frame6 } from './components/Frame6'
 import './styles/rajasthani-theme.css'
 
 export const App: React.FC = () => {
@@ -21,10 +19,6 @@ export const App: React.FC = () => {
         return <Frame3 />
       case 'frame4':
         return <Frame4 />
-      case 'frame5':
-        return <Frame5 />
-      case 'frame6':
-        return <Frame6 />
       default:
         return <Frame1 />
     }

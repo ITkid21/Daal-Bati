@@ -38,6 +38,7 @@ export const Frame4: React.FC = () => {
 
   // ── Stage Management ────────────────────────────────────────────────────────
   const [baatiStage, setBaatiStage] = useState<BaatiStage>('ingredients')
+  const [isTransitioning, setIsTransitioning] = useState(false)
 
   // ── Stage 1: Ingredients ────────────────────────────────────────────────────
   const [completedIngredients, setCompletedIngredients] = useState<string[]>([])
@@ -185,6 +186,12 @@ export const Frame4: React.FC = () => {
       setTimeout(() => setBaatiStage('kneading'), 600)
     }
   }, [allDoughIngredients, baatiStage])
+
+  // ── Keep the completed Baati screen here while later scenes are being built ──
+  useEffect(() => {
+    if (baatiStage !== 'complete') return
+    setIsTransitioning(false)
+  }, [baatiStage])
 
   // ── Bowl collision check ───────────────────────────────────────────────────
   const checkBowlCollision = useCallback((clientX: number, clientY: number): boolean => {
@@ -407,7 +414,7 @@ export const Frame4: React.FC = () => {
 
   return (
     <div
-      className="frame-stage frame4-stage"
+      className={`frame-stage frame4-stage ${isTransitioning ? 'frame4-fade-out' : ''}`}
       ref={stageRef}
     >
       {/* Background Audio */}

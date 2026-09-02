@@ -46,7 +46,7 @@
   bottom: 3%;
   left: 50%;
   transform: translateX(-50%);
-  width: 88%;
+  width: min(92vw, 760px);
   z-index: 10;
   cursor: pointer;
 }
@@ -95,7 +95,7 @@
 
 .dialogue-text-content {
   font-family: 'Outfit', 'Segoe UI', sans-serif;
-  font-size: 1rem;
+  font-size: clamp(0.72rem, 2vw, 1rem);
   color: #2C1407;
   font-weight: 600;
   line-height: 1.55;
