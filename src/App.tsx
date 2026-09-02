@@ -26,6 +26,13 @@ export const App: React.FC = () => {
 
   return (
     <div className="app-container">
+      <div className="orientation-prompt" role="status" aria-live="polite">
+        <div className="orientation-prompt-card">
+          <div className="orientation-icon" aria-hidden="true">↔</div>
+          <h2>TURN YOUR DEVICE SIDEWAYS</h2>
+          <p>Keep your device horizontal for the best cooking experience.</p>
+        </div>
+      </div>
       <div className="game-stage-wrapper">
         {renderFrame()}
       </div>
