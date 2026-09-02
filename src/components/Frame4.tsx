@@ -510,7 +510,7 @@ export const Frame4: React.FC = () => {
           autoPlay loop muted playsInline
         />
 
-        {completedBaatiCount > 0 && (
+        {completedBaatiCount > 0 && completedBaatiCount < BAATI_CYCLES_REQUIRED && (
           <div className="uncooked-baati-table" aria-label={`${completedBaatiCount} uncooked baati ready`}>
             {Array.from({ length: completedBaatiCount }, (_, index) => (
               <img
@@ -794,7 +794,7 @@ export const Frame4: React.FC = () => {
                     : '26%',
                   top: baatiDragState
                     ? (baatiDragState.isSnapping ? `${baatiDragState.startY}px` : `${baatiDragState.currentY - baatiDragState.offsetY}px`)
-                    : '68%',
+                    : '64%',
                   zIndex: baatiDragState ? 900 : 50,
                   pointerEvents: baatiStage === 'placement' ? 'auto' : 'none'
                 }}

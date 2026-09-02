@@ -450,7 +450,7 @@
 }
 
 .formed-baati-draggable {
-  width: clamp(120px, 18vw, 210px);
+  width: clamp(150px, 22vw, 250px);
   min-height: 80px;
   cursor: grab;
   touch-action: none;
@@ -988,6 +988,10 @@
 }
 
 @media (max-width: 768px) {
+  .formed-baati-draggable {
+    width: min(42vw, 210px);
+  }
+
   .central-traditional-dish-target {
     width: 44%;
     height: 24%;
