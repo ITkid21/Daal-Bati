@@ -110,6 +110,18 @@ body {
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.75), 0 0 28px rgba(212, 175, 55, 0.2);
   }
 
+  .orientation-video {
+    display: block;
+    width: min(100%, 220px);
+    height: auto;
+    max-height: 120px;
+    margin: 0 auto 18px;
+    object-fit: contain;
+    border: 1px solid rgba(255, 215, 0, 0.55);
+    border-radius: 7px;
+    background: #120704;
+  }
+
   .orientation-icon {
     width: 74px;
     height: 52px;

@@ -5,6 +5,7 @@ import { Frame1 } from './components/Frame1'
 import { Frame2 } from './components/Frame2'
 import { Frame3 } from './components/Frame3'
 import { Frame4 } from './components/Frame4'
+import rotatePhoneVideo from '../video frames/Rotate Phone.mp4'
 import './styles/rajasthani-theme.css'
 
 export const App: React.FC = () => {
@@ -31,7 +32,16 @@ export const App: React.FC = () => {
     <div className="app-container">
       <div className="orientation-prompt" role="status" aria-live="polite">
         <div className="orientation-prompt-card">
-          <div className="orientation-icon" aria-hidden="true">↔</div>
+          <video
+            className="orientation-video"
+            src={rotatePhoneVideo}
+            autoPlay
+            loop
+            muted
+            playsInline
+            onCanPlay={(event) => event.currentTarget.play().catch(() => {})}
+            aria-label="Animation showing how to rotate your phone"
+          />
           <h2>TURN YOUR DEVICE SIDEWAYS</h2>
           <p>Keep your device horizontal for the best cooking experience.</p>
         </div>
