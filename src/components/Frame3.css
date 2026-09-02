@@ -735,28 +735,51 @@
 /* Water drop stream animation */
 .pour-water-stream {
   position: absolute;
-  top: -60px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
+  top: 58%;
+  left: 62%;
+  width: 12px;
+  height: 94px;
+  transform: rotate(34deg);
   pointer-events: none;
+  z-index: 3;
+}
+
+.water-stream-core {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 8px;
+  height: 100%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: linear-gradient(90deg, rgba(74, 144, 226, 0.45), #b9e7ff 45%, rgba(74, 144, 226, 0.45));
+  box-shadow: 0 0 8px rgba(93, 173, 226, 0.9);
+  animation: waterStreamPulse 0.35s infinite alternate ease-in-out;
 }
 
 .water-drop {
-  font-size: 1.2rem;
-  animation: dropFall 0.6s infinite linear;
+  position: absolute;
+  width: 10px;
+  height: 15px;
+  border-radius: 60% 60% 55% 55%;
+  background: linear-gradient(135deg, #e0f7ff, #4a90e2 65%);
+  box-shadow: 0 0 7px rgba(93, 173, 226, 0.9);
+  animation: dropFall 0.7s infinite linear;
 }
-.wd1 { animation-delay: 0s; }
-.wd2 { animation-delay: 0.2s; }
-.wd3 { animation-delay: 0.4s; }
+
+.wd1 { left: 0; animation-delay: 0s; }
+.wd2 { left: 7px; animation-delay: 0.23s; }
+.wd3 { left: -5px; animation-delay: 0.46s; }
+
+@keyframes waterStreamPulse {
+  from { opacity: 0.7; transform: translateX(-50%) scaleX(0.8); }
+  to { opacity: 1; transform: translateX(-50%) scaleX(1.15); }
+}
 
 @keyframes dropFall {
-  0% { opacity: 1; transform: translateY(0) scale(1); }
-  60% { opacity: 0.8; transform: translateY(30px) scale(0.9); }
-  100% { opacity: 0; transform: translateY(60px) scale(0.6); }
+  0% { opacity: 0; transform: translateY(-8px) scale(0.7); }
+  20% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(88px) scale(0.85); }
 }
 
 /* Draggable Lota / Water Pitcher */

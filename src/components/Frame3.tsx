@@ -665,10 +665,11 @@ export const Frame3: React.FC = () => {
             )}
             {/* Pour stream — attached to lota so it always appears at its actual position */}
             {isPouringActive && (
-              <div className="pour-water-stream" style={{ position: 'absolute', bottom: '-50px', left: '50%', transform: 'translateX(-50%)', pointerEvents: 'none' }}>
-                <div className="water-drop wd1">💧</div>
-                <div className="water-drop wd2">💧</div>
-                <div className="water-drop wd3">💧</div>
+              <div className="pour-water-stream" aria-hidden="true">
+                <span className="water-stream-core"></span>
+                <span className="water-drop wd1"></span>
+                <span className="water-drop wd2"></span>
+                <span className="water-drop wd3"></span>
               </div>
             )}
           </div>
