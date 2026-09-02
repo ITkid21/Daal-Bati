@@ -1,0 +1,189 @@
+/* ══════════════════════════════════════════════
+   FRAME 2 — Video Background + Dialogue Overlay
+══════════════════════════════════════════════ */
+
+.frame2-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  transition: opacity 0.4s ease;
+}
+
+.frame-fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ── Video fills the stage exactly ── */
+.frame2-video-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Subtle vignette so the text box stands out */
+.frame2-light-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 100%, rgba(252, 248, 248, 0.45) 0%, transparent 70%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* ══════════════════════════════════════════════
+   DIALOGUE WRAPPER
+   Sits at the bottom of the frame — no scroll
+   art beneath it now, so we draw our own card.
+══════════════════════════════════════════════ */
+.frame2-dialogue-wrapper {
+  position: absolute;
+  bottom: 3%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 88%;
+  z-index: 10;
+  cursor: pointer;
+}
+
+.dialogue-box-component {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ── Parchment-style scroll card ── */
+.dialogue-scroll-card {
+  width: 100%;
+  min-height: 100px;
+  background:
+    linear-gradient(135deg,
+      rgba(248, 235, 190, 0.97) 0%,
+      rgba(237, 214, 155, 0.97) 50%,
+      rgba(225, 195, 120, 0.97) 100%);
+  border: 2.5px solid #8B6914;
+  border-radius: 10px;
+  box-shadow:
+    0 8px 28px rgba(0,0,0,0.65),
+    inset 0 1px 0 rgba(255,255,255,0.3),
+    inset 0 -1px 0 rgba(0,0,0,0.15);
+  padding: 18px 24px 14px;
+  position: relative;
+  /* Decorative corner marks */
+  background-image:
+    linear-gradient(135deg, rgba(248,235,190,0.97) 0%, rgba(225,195,120,0.97) 100%);
+}
+
+/* Ornamental corner dots */
+.dialogue-scroll-card::before,
+.dialogue-scroll-card::after {
+  content: '✦';
+  position: absolute;
+  font-size: 0.7rem;
+  color: #8B6914;
+  opacity: 0.6;
+}
+.dialogue-scroll-card::before { top: 6px; left: 10px; }
+.dialogue-scroll-card::after  { top: 6px; right: 10px; }
+
+.dialogue-text-content {
+  font-family: 'Outfit', 'Segoe UI', sans-serif;
+  font-size: 1rem;
+  color: #2C1407;
+  font-weight: 600;
+  line-height: 1.55;
+  margin: 0;
+  text-shadow: 0 1px 0 rgba(255,250,220,0.5);
+  letter-spacing: 0.1px;
+}
+
+.dialogue-cursor {
+  display: inline-block;
+  color: #6B2E0A;
+  font-weight: 900;
+  font-size: 1.1rem;
+  animation: cursorBlink 0.65s infinite;
+  margin-left: 1px;
+}
+
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* ── Continue Button ── */
+.dialogue-continue-btn {
+  align-self: flex-end;
+  background: linear-gradient(135deg, #4A1E08, #2A0E04);
+  border: 1.5px solid #C4970A;
+  border-radius: 6px;
+  padding: 8px 20px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.55);
+}
+
+.dialogue-continue-btn span {
+  font-family: 'Cinzel', Georgia, serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+  color: #FFD700;
+}
+
+.continue-chevron {
+  font-size: 1rem;
+  animation: chevronPulse 1.2s infinite ease-in-out;
+}
+
+@keyframes chevronPulse {
+  0%, 100% { transform: translateX(0);   }
+  50%       { transform: translateX(4px); }
+}
+
+.dialogue-continue-btn:hover {
+  background: linear-gradient(135deg, #7A421D, #4E250E);
+  border-color: #FFE066;
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.6), 0 0 14px rgba(255,215,0,0.4);
+}
+
+.continue-btn-pulse {
+  animation: continueGlowPulse 1.8s infinite ease-in-out;
+}
+
+@keyframes continueGlowPulse {
+  0%, 100% {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5), 0 0 8px rgba(255,215,0,0.35);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 6px 18px rgba(0,0,0,0.65), 0 0 22px rgba(255,215,0,0.8);
+    transform: scale(1.05);
+  }
+}
+
+.dialogue-continue-btn:active { transform: translateY(1px); }
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .dialogue-text-content { font-size: 0.88rem; }
+}
+
+@media (max-width: 768px) {
+  .frame2-dialogue-wrapper { width: 94%; bottom: 2%; }
+  .dialogue-text-content { font-size: 0.75rem; line-height: 1.4; }
+  .dialogue-scroll-card { padding: 12px 16px 10px; min-height: 80px; }
+  .dialogue-continue-btn { padding: 6px 14px; }
+  .dialogue-continue-btn span { font-size: 0.68rem; }
+}

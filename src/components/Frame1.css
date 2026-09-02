@@ -1,0 +1,167 @@
+.frame1-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.frame-fade-out {
+  opacity: 0;
+  transform: scale(1.02);
+  pointer-events: none;
+}
+
+.frame-bg-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.frame-overlay-vignette {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle at center,
+    rgba(20, 10, 5, 0.25) 0%,
+    rgba(15, 6, 2, 0.75) 100%
+  );
+  z-index: 2;
+  pointer-events: none;
+}
+
+.frame1-center-container {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  width: 100%;
+  min-height: 300px;
+}
+
+.card-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.card-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.frame1-card {
+  max-width: 580px;
+  width: 90%;
+  padding: 40px 36px;
+  text-align: center;
+  animation: cardEntrance 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes cardEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(28px) scale(0.92);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.royal-emblem {
+  color: #FFD700;
+  font-size: 1.2rem;
+  letter-spacing: 6px;
+  margin-bottom: 8px;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+}
+
+.frame1-main-title {
+  font-family: var(--font-serif);
+  font-size: 3.4rem;
+  font-weight: 900;
+  letter-spacing: 6px;
+  color: #FFD700;
+  background: linear-gradient(180deg, #FFF8DC 0%, #FFD700 50%, #DAA520 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0 0 4px 0;
+  line-height: 1.1;
+}
+
+.frame1-subtitle {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  color: #EDC9AF;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  opacity: 0.95;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.title-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 12px 0 20px 0;
+}
+
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+}
+
+.divider-gem {
+  color: #FFD700;
+  font-size: 0.9rem;
+  text-shadow: 0 0 8px #FFD700;
+}
+
+.frame1-lore {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #F5DEB3;
+  margin-bottom: 28px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+  font-weight: 400;
+}
+
+.start-game-btn {
+  font-size: 1.25rem;
+  padding: 16px 52px;
+}
+
+@media (max-height: 600px) {
+  .frame1-card {
+    padding: 24px 28px;
+  }
+  .frame1-main-title {
+    font-size: 2.4rem;
+  }
+  .frame1-subtitle {
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+  }
+  .frame1-lore {
+    font-size: 0.82rem;
+    margin-bottom: 16px;
+  }
+  .start-game-btn {
+    font-size: 1rem;
+    padding: 10px 32px;
+  }
+}

@@ -1,0 +1,359 @@
+/* ═══════════════════════════════════════
+   FRAME 6 — ROYAL CELEBRATION SCREEN
+═══════════════════════════════════════ */
+.frame6-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+.frame6-bg-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 1;
+  pointer-events: none;
+  filter: brightness(0.65) saturate(1.2);
+}
+
+/* Warm golden radial glow over the scene */
+.frame6-gold-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: radial-gradient(
+    ellipse at 50% 50%,
+    rgba(180, 120, 10, 0.18) 0%,
+    rgba(10, 4, 2, 0.55) 70%,
+    rgba(8, 2, 0, 0.82) 100%
+  );
+  pointer-events: none;
+}
+
+/* ── Confetti / Sparkle burst ── */
+.frame6-confetti-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.confetti-piece {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+  opacity: 0;
+  animation: confettiFall 3.5s infinite ease-in;
+}
+
+/* Varied colors & positions */
+.cp-1  { left: 5%;  background: #FFD700; animation-delay: 0s;    animation-duration: 3.2s; }
+.cp-2  { left: 10%; background: #E63946; animation-delay: 0.4s;  animation-duration: 3.8s; border-radius: 50%; }
+.cp-3  { left: 18%; background: #4CAF50; animation-delay: 0.8s;  animation-duration: 2.9s; transform: rotate(45deg); }
+.cp-4  { left: 25%; background: #FFD700; animation-delay: 1.2s;  animation-duration: 3.5s; }
+.cp-5  { left: 33%; background: #FF8C00; animation-delay: 0.2s;  animation-duration: 4.1s; border-radius: 50%; }
+.cp-6  { left: 42%; background: #E63946; animation-delay: 1.6s;  animation-duration: 3.0s; transform: rotate(30deg); }
+.cp-7  { left: 50%; background: #FFD700; animation-delay: 0.6s;  animation-duration: 2.7s; }
+.cp-8  { left: 58%; background: #4CAF50; animation-delay: 2.0s;  animation-duration: 3.9s; border-radius: 50%; }
+.cp-9  { left: 65%; background: #FF8C00; animation-delay: 1.0s;  animation-duration: 3.3s; }
+.cp-10 { left: 72%; background: #FFD700; animation-delay: 1.4s;  animation-duration: 2.8s; transform: rotate(60deg); }
+.cp-11 { left: 80%; background: #E63946; animation-delay: 0.3s;  animation-duration: 4.2s; border-radius: 50%; }
+.cp-12 { left: 88%; background: #4CAF50; animation-delay: 1.8s;  animation-duration: 3.6s; }
+.cp-13 { left: 95%; background: #FFD700; animation-delay: 0.7s;  animation-duration: 3.1s; transform: rotate(45deg); }
+.cp-14 { left: 15%; background: #FF8C00; animation-delay: 2.4s;  animation-duration: 2.6s; border-radius: 50%; }
+.cp-15 { left: 38%; background: #FFD700; animation-delay: 0.9s;  animation-duration: 3.7s; }
+.cp-16 { left: 55%; background: #E63946; animation-delay: 3.1s;  animation-duration: 3.4s; transform: rotate(20deg); }
+.cp-17 { left: 77%; background: #4CAF50; animation-delay: 2.2s;  animation-duration: 2.5s; border-radius: 50%; }
+.cp-18 { left: 22%; background: #FFD700; animation-delay: 3.5s;  animation-duration: 4.0s; }
+.cp-19 { left: 46%; background: #FF8C00; animation-delay: 1.7s;  animation-duration: 3.2s; transform: rotate(70deg); }
+.cp-20 { left: 62%; background: #E63946; animation-delay: 2.8s;  animation-duration: 2.9s; border-radius: 50%; }
+.cp-21 { left: 83%; background: #FFD700; animation-delay: 0.1s;  animation-duration: 3.8s; }
+.cp-22 { left: 92%; background: #4CAF50; animation-delay: 1.3s;  animation-duration: 3.6s; transform: rotate(55deg); }
+
+@keyframes confettiFall {
+  0%   { opacity: 0; top: -5%;  transform: rotate(0deg)   scale(0.5); }
+  10%  { opacity: 1; }
+  90%  { opacity: 0.8; }
+  100% { opacity: 0; top: 105%; transform: rotate(360deg) scale(1.2); }
+}
+
+/* ── Central celebration card ── */
+.frame6-center-card {
+  position: relative;
+  z-index: 10;
+  max-width: 680px;
+  width: 92%;
+  padding: 32px 36px 28px;
+  text-align: center;
+  animation: cardRiseIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  max-height: 90vh;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.frame6-center-card::-webkit-scrollbar { display: none; }
+
+@keyframes cardRiseIn {
+  0%   { opacity: 0; transform: translateY(30px) scale(0.92); }
+  100% { opacity: 1; transform: translateY(0)    scale(1); }
+}
+
+/* ── Royal emblem ── */
+.frame6-royal-emblem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.emblem-star {
+  color: #FFD700;
+  font-size: 0.9rem;
+  animation: emblemGlow 2s infinite alternate ease-in-out;
+}
+
+@keyframes emblemGlow {
+  0%   { text-shadow: 0 0 6px rgba(255, 215, 0, 0.5); }
+  100% { text-shadow: 0 0 18px rgba(255, 215, 0, 1);  }
+}
+
+.emblem-text {
+  font-family: var(--font-serif);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: #EDC9AF;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* ── Animated title lines ── */
+.frame6-title-lines {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.celebration-line {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.line-hidden {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.line-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cel-emoji {
+  font-size: 1.6rem;
+}
+
+.celebration-line-0 .cel-text {
+  font-family: var(--font-serif);
+  font-size: 2.4rem;
+  font-weight: 900;
+  color: #FFD700;
+  letter-spacing: 4px;
+  text-shadow: 0 0 25px rgba(255, 215, 0, 0.8), 0 2px 6px rgba(0, 0, 0, 0.9);
+}
+
+.celebration-line-1 .cel-text {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #FFF8DC;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.celebration-line-2 .cel-text {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #EDC9AF;
+  font-style: italic;
+}
+
+/* ── Divider (reuse from theme) ── */
+.title-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 14px 0;
+}
+
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #D4AF37, transparent);
+}
+
+.divider-gem {
+  color: #FFD700;
+  font-size: 0.9rem;
+}
+
+/* ── Ingredients summary ── */
+.frame6-ingredients-summary {
+  background: rgba(15, 7, 3, 0.75);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+}
+
+.summary-heading {
+  font-family: var(--font-serif);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #D4AF37;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.summary-grid {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+.summary-col {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: flex-start;
+  flex: 1;
+}
+
+.summary-col-label {
+  font-family: var(--font-serif);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #FFD700;
+  letter-spacing: 1.5px;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
+
+.summary-badge {
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 10px;
+  white-space: nowrap;
+}
+
+.daal-badge {
+  background: rgba(212, 175, 55, 0.15);
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  color: #F5DEB3;
+}
+
+.baati-badge {
+  background: rgba(200, 90, 50, 0.15);
+  border: 1px solid rgba(200, 90, 50, 0.5);
+  color: #EDC9AF;
+}
+
+/* ── Achievement row ── */
+.frame6-achievement {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.achievement-star {
+  font-size: 1.1rem;
+  animation: starPop 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.8));
+}
+
+.achievement-star:nth-child(1) { animation-delay: 1.8s; }
+.achievement-star:nth-child(2) { animation-delay: 1.9s; }
+.achievement-star:nth-child(3) { animation-delay: 2.0s; }
+.achievement-star:nth-child(5) { animation-delay: 2.1s; }
+.achievement-star:nth-child(6) { animation-delay: 2.2s; }
+.achievement-star:nth-child(7) { animation-delay: 2.3s; }
+
+@keyframes starPop {
+  0%   { transform: scale(0); opacity: 0; }
+  70%  { transform: scale(1.3); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.achievement-label {
+  width: 100%;
+  font-family: var(--font-serif);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #EDC9AF;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+/* ── Actions ── */
+.frame6-actions {
+  display: flex;
+  justify-content: center;
+  animation: actionFadeIn 0.5s ease-out;
+}
+
+@keyframes actionFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.frame6-replay-btn {
+  font-size: 1.1rem;
+  padding: 14px 44px;
+}
+
+@media (max-width: 768px) {
+  .frame6-center-card {
+    padding: 22px 18px 20px;
+  }
+
+  .celebration-line-0 .cel-text {
+    font-size: 1.7rem;
+  }
+
+  .celebration-line-1 .cel-text {
+    font-size: 1.05rem;
+  }
+
+  .summary-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .summary-col {
+    align-items: center;
+  }
+
+  .summary-badge {
+    font-size: 0.62rem;
+  }
+}

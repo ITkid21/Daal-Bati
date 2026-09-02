@@ -1,0 +1,194 @@
+/* ═══════════════════════════════════════
+   FRAME 5 — BAATI ROASTING SCENE
+═══════════════════════════════════════ */
+.frame5-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  user-select: none;
+  touch-action: none;
+}
+
+.frame5-bg-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Rich warm vignette overlay */
+.frame5-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: radial-gradient(
+    ellipse at 50% 45%,
+    transparent 30%,
+    rgba(20, 6, 2, 0.45) 65%,
+    rgba(10, 2, 0, 0.78) 100%
+  );
+  pointer-events: none;
+}
+
+/* Fire glow pulsing from bottom (chulha ambiance) */
+.frame5-fire-glow {
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  right: 10%;
+  height: 38%;
+  z-index: 3;
+  background: radial-gradient(
+    ellipse at 50% 100%,
+    rgba(220, 80, 10, 0.35) 0%,
+    rgba(255, 140, 0, 0.18) 40%,
+    transparent 75%
+  );
+  animation: fireGlowPulse 2.2s infinite alternate ease-in-out;
+  pointer-events: none;
+}
+
+@keyframes fireGlowPulse {
+  0%   { opacity: 0.65; transform: scaleY(1); }
+  100% { opacity: 1;    transform: scaleY(1.05); }
+}
+
+/* Floating ember particles */
+.frame5-ember-container {
+  position: absolute;
+  bottom: 28%;
+  left: 25%;
+  right: 25%;
+  height: 40%;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.ember {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #FFD700 0%, #FF6B00 60%, transparent 100%);
+  filter: blur(1px);
+  animation: emberFloat 3.5s infinite ease-out;
+  opacity: 0;
+}
+
+.ember-1  { left: 10%; animation-delay: 0s;    animation-duration: 2.8s; }
+.ember-2  { left: 25%; animation-delay: 0.5s;  animation-duration: 3.2s; }
+.ember-3  { left: 40%; animation-delay: 1.0s;  animation-duration: 2.5s; }
+.ember-4  { left: 55%; animation-delay: 1.5s;  animation-duration: 3.8s; }
+.ember-5  { left: 70%; animation-delay: 0.8s;  animation-duration: 3.0s; }
+.ember-6  { left: 85%; animation-delay: 2.0s;  animation-duration: 2.7s; }
+.ember-7  { left: 33%; animation-delay: 1.2s;  animation-duration: 4.0s; }
+.ember-8  { left: 62%; animation-delay: 2.5s;  animation-duration: 3.3s; }
+
+@keyframes emberFloat {
+  0%   { opacity: 0; transform: translateY(0)    scale(0.5); }
+  20%  { opacity: 1; transform: translateY(-20px) scale(1.2); }
+  80%  { opacity: 0.6; transform: translateY(-70px) scale(0.8) translateX(12px); }
+  100% { opacity: 0; transform: translateY(-100px) scale(0.3) translateX(20px); }
+}
+
+/* ── Stage Label ── */
+.frame5-stage-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.stage-gem {
+  color: #FFD700;
+  font-size: 0.8rem;
+}
+
+.stage-label-text {
+  font-family: var(--font-serif);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #EDC9AF;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
+}
+
+/* ── Dialogue Wrapper (bottom overlay) ── */
+.frame5-dialogue-wrapper {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 24px 24px 24px;
+  background: linear-gradient(to top, rgba(10, 3, 0, 0.92) 0%, rgba(10, 3, 0, 0.7) 50%, transparent 100%);
+  cursor: pointer;
+}
+
+/* ── Parchment scroll card ── */
+.dialogue-scroll-card.frame5-scroll {
+  background: linear-gradient(135deg,
+    rgba(40, 22, 12, 0.97) 0%,
+    rgba(28, 12, 5, 0.97) 100%
+  );
+  border: 1.5px solid #D4AF37;
+  border-radius: 12px;
+  padding: 18px 24px;
+  max-width: 860px;
+  width: 100%;
+  box-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.8),
+    0 0 20px rgba(212, 175, 55, 0.2),
+    inset 0 0 15px rgba(212, 175, 55, 0.06);
+}
+
+/* ── Dialogue Continue Button ── */
+.frame5-continue-btn {
+  margin-top: 16px;
+  background: linear-gradient(135deg, #8B2500 0%, #C03010 50%, #8B2500 100%);
+  border: 2px solid #FFD700;
+  color: #FFF8DC;
+  font-family: var(--font-serif);
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  padding: 11px 32px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6), 0 0 16px rgba(255, 100, 0, 0.3);
+}
+
+.frame5-continue-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.7), 0 0 25px rgba(255, 140, 0, 0.5);
+  background: linear-gradient(135deg, #A32800 0%, #E03810 50%, #A32800 100%);
+}
+
+.frame5-continue-btn:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+/* ── fade out ── */
+.frame-fade-out {
+  animation: frameFadeOut 0.45s ease-in forwards;
+}
+
+@keyframes frameFadeOut {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
