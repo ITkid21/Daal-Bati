@@ -735,11 +735,12 @@
 /* Water drop stream animation */
 .pour-water-stream {
   position: absolute;
-  top: 58%;
-  left: 62%;
+  top: 44%;
+  left: 67%;
   width: 12px;
-  height: 94px;
-  transform: rotate(34deg);
+  height: 92px;
+  transform: rotate(-24deg);
+  transform-origin: top center;
   pointer-events: none;
   z-index: 3;
 }
@@ -784,6 +785,7 @@
 
 /* Draggable Lota / Water Pitcher */
 .water-lota-draggable {
+  position: relative;
   z-index: 70;
   display: flex;
   flex-direction: column;
