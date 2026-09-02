@@ -4,6 +4,8 @@ import { BAATI_PREPARATION_RECIPE, INGREDIENT_COLORS, RecipeStep } from '../data
 import { ProgressBar } from './ProgressBar'
 import frame4BgVideo from '../../video frames/gamebackgroundframe4.mp4'
 import backgroundSong from '../../sounds/backgroundSong1.mp3'
+import uncookedBaatiImage from '../../frames/elements/uncookedbati.png'
+import threeUncookedBaatiImage from '../../frames/elements/3uncookedbati.png'
 import './Frame4.css'
 
 interface DraggingState {
@@ -32,6 +34,7 @@ const DOUGH_INGREDIENTS = BAATI_PREPARATION_RECIPE.filter(s => s.id !== 'baati-r
 // Kneading / Shaping thresholds (cumulative pointer distance in px)
 const KNEAD_THRESHOLD = 1800  // pixels of movement needed
 const SHAPE_THRESHOLD = 1200
+const BAATI_CYCLES_REQUIRED = 3
 
 export const Frame4: React.FC = () => {
   const { resetGame, setCurrentFrame } = useGame()
@@ -56,6 +59,8 @@ export const Frame4: React.FC = () => {
   const [shapeProgress, setShapeProgress] = useState(0)
   const [isShaping, setIsShaping] = useState(false)
   const [shapeComplete, setShapeComplete] = useState(false)
+  const [completedBaatiCount, setCompletedBaatiCount] = useState(0)
+  const [showUncookedPopup, setShowUncookedPopup] = useState(false)
 
   // ── Stage 4: Placement ──────────────────────────────────────────────────────
   const [isPlateHovered, setIsPlateHovered] = useState(false)
@@ -159,16 +164,16 @@ export const Frame4: React.FC = () => {
         break
       case 'kneading':
         if (kneadComplete) {
-          setGuidanceMessage('Dough kneaded! Now shape the Baati...')
+          setGuidanceMessage(`Dough kneaded! Now shape Baati ${completedBaatiCount + 1} of ${BAATI_CYCLES_REQUIRED}...`)
         } else {
-          setGuidanceMessage('Press & move over the dough to knead it! Keep moving!')
+          setGuidanceMessage(`Press & move over the dough to knead Baati ${completedBaatiCount + 1} of ${BAATI_CYCLES_REQUIRED}!`)
         }
         break
       case 'shaping':
         if (shapeComplete) {
-          setGuidanceMessage('Baati shaped! Drag it onto the traditional plate!')
+          setGuidanceMessage(`Baati ${completedBaatiCount + 1} shaped! Preparing the next one...`)
         } else {
-          setGuidanceMessage('Press & move in circles to shape the round Baati!')
+          setGuidanceMessage(`Press & move in circles to shape Baati ${completedBaatiCount + 1} of ${BAATI_CYCLES_REQUIRED}!`)
         }
         break
       case 'placement':
@@ -178,7 +183,7 @@ export const Frame4: React.FC = () => {
         setGuidanceMessage('Royal Baati Complete! Authentic Rajasthani Baati is ready!')
         break
     }
-  }, [baatiStage, completedIngredients.length, currentIngredientStep, kneadComplete, shapeComplete])
+  }, [baatiStage, completedIngredients.length, currentIngredientStep, kneadComplete, shapeComplete, completedBaatiCount])
 
   // ── Transition from ingredients to kneading ───────────────────────────────
   useEffect(() => {
@@ -311,6 +316,24 @@ export const Frame4: React.FC = () => {
     prevKneadPosRef.current = null
   }
 
+  const finishBaatiCycle = () => {
+    const nextCount = completedBaatiCount + 1
+    setCompletedBaatiCount(nextCount)
+    setShowUncookedPopup(true)
+    setTimeout(() => setShowUncookedPopup(false), 1800)
+    setKneadProgress(0)
+    setKneadComplete(false)
+    kneadProgressRef.current = 0
+    setShapeProgress(0)
+    setShapeComplete(false)
+    shapeProgressRef.current = 0
+    if (nextCount >= BAATI_CYCLES_REQUIRED) {
+      setBaatiStage('placement')
+    } else {
+      setBaatiStage('kneading')
+    }
+  }
+
   // ── Stage 3: Shaping handlers ─────────────────────────────────────────────
   const handleShapeZonePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
     if (shapeComplete || baatiStage !== 'shaping') return
@@ -332,7 +355,7 @@ export const Frame4: React.FC = () => {
         if (shapeProgressRef.current >= SHAPE_THRESHOLD && !shapeComplete) {
           setShapeComplete(true)
           setIsShaping(false)
-          setTimeout(() => setBaatiStage('placement'), 800)
+          setTimeout(finishBaatiCycle, 800)
         }
       }
     }
@@ -487,6 +510,26 @@ export const Frame4: React.FC = () => {
           autoPlay loop muted playsInline
         />
 
+        {completedBaatiCount > 0 && (
+          <div className="uncooked-baati-table" aria-label={`${completedBaatiCount} uncooked baati ready`}>
+            {Array.from({ length: completedBaatiCount }, (_, index) => (
+              <img
+                key={index}
+                src={uncookedBaatiImage}
+                alt="Uncooked baati"
+                className={`uncooked-baati-item uncooked-baati-${index + 1}`}
+              />
+            ))}
+          </div>
+        )}
+
+        {showUncookedPopup && (
+          <div className="uncooked-baati-popup" role="status" aria-live="polite">
+            <img src={uncookedBaatiImage} alt="" />
+            <span>UNCOOKED BAATI READY</span>
+          </div>
+        )}
+
         {/* Ambient Steam from Daal Kadai (background) */}
         <div className="bg-daal-kadai-steam" title="Daal Simmering on Chulha">
           <div className="simmer-steam-particle steam-p1"></div>
@@ -584,7 +627,7 @@ export const Frame4: React.FC = () => {
               <div className="minigame-progress-panel">
                 <div className="minigame-progress-label">
                   <span className="progress-icon">🤲</span>
-                  KNEADING
+                  KNEADING · BAATI {completedBaatiCount + 1}/{BAATI_CYCLES_REQUIRED}
                 </div>
                 <div className="minigame-progress-track">
                   <div
@@ -645,7 +688,7 @@ export const Frame4: React.FC = () => {
               <div className="minigame-progress-panel">
                 <div className="minigame-progress-label">
                   <span className="progress-icon">🧆</span>
-                  SHAPING
+                  SHAPING · BAATI {completedBaatiCount + 1}/{BAATI_CYCLES_REQUIRED}
                 </div>
                 <div className="minigame-progress-track">
                   <div
@@ -762,7 +805,7 @@ export const Frame4: React.FC = () => {
                 title="Drag Baati to the central dish"
               >
                 <div className="formed-baati-body">
-                  <span className="formed-baati-emoji">🧆</span>
+                  <img src={threeUncookedBaatiImage} alt="Three uncooked baatis" className="formed-baati-image" />
                   <span className="formed-baati-label">तैयार बाटी</span>
                 </div>
                 {!baatiDragState && (
