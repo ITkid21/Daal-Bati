@@ -1,0 +1,57 @@
+.intro-stage {
+  position: relative;
+  background: #120704;
+  display: grid;
+  place-items: center;
+}
+
+.intro-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #120704;
+}
+
+.intro-play-button {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  min-width: min(190px, 60vw);
+  min-height: 52px;
+  padding: 13px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #241106;
+  font: 700 clamp(0.78rem, 2vw, 1rem) var(--font-serif);
+  letter-spacing: 2px;
+  background: linear-gradient(135deg, #fff1a8, #d4af37 55%, #b8860b);
+  border: 2px solid #fff8dc;
+  border-radius: 7px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.7), 0 0 26px rgba(255, 215, 0, 0.55);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.intro-play-button:hover {
+  transform: translate(-50%, -50%) scale(1.04);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.75), 0 0 34px rgba(255, 215, 0, 0.75);
+}
+
+.intro-play-button:active {
+  transform: translate(-50%, -50%) scale(0.98);
+}
+
+.intro-play-icon {
+  font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+  .intro-play-button {
+    min-height: 48px;
+    min-width: min(170px, 58vw);
+    padding: 11px 22px;
+  }
+}

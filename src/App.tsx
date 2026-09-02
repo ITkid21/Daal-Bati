@@ -1,5 +1,6 @@
 import React from 'react'
 import { useGame } from './context/GameContext'
+import { Intro } from './components/Intro'
 import { Frame1 } from './components/Frame1'
 import { Frame2 } from './components/Frame2'
 import { Frame3 } from './components/Frame3'
@@ -11,6 +12,8 @@ export const App: React.FC = () => {
 
   const renderFrame = () => {
     switch (gameState.currentFrame) {
+      case 'intro':
+        return <Intro />
       case 'frame1':
         return <Frame1 />
       case 'frame2':

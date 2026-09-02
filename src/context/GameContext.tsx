@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react'
 
-export type Frame = 'frame1' | 'frame2' | 'frame3' | 'frame4' | 'frame5' | 'frame6'
+export type Frame = 'intro' | 'frame1' | 'frame2' | 'frame3' | 'frame4' | 'frame5' | 'frame6'
 export type GameStatus = 'idle' | 'dragging' | 'validating' | 'success' | 'error' | 'complete'
 
 export interface FeedbackState {
@@ -32,7 +32,7 @@ const GameContext = createContext<GameContextType | undefined>(undefined)
 
 export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const initialState: GameState = {
-    currentFrame: 'frame1',
+    currentFrame: 'intro',
     currentStepIndex: 0,
     completedSteps: [],
     draggedIngredient: null,
